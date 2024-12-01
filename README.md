@@ -14,7 +14,7 @@ While the Raspberry Pi 4 Model B offers convenient power options like USB-C and 
 - (1x) [100 Microfarad Capacitor](https://www.sparkfun.com/products/96 "sparkfun.com")
 - (1x) [TO-220 Heatsink](https://www.sparkfun.com/products/121 "sparkfun.com")
 - (1x) [Lectron Pro 7.4V 2000mAh 25C Lipo Battery with XT60 Connector](https://commonsenserc.com/product_info.php?cPath=37_213&products_id=7180 "commonsenserc.com")
-- (1x) [XT60 Charging Adapter with Banana Plugs](https://commonsenserc.com/product_info.php?cPath=187&products_id=4741 "commonsenserc.com") or (1x) [XT60 Connectors - Male/Female Pair](https://www.sparkfun.com/products/10474 "sparkfun.com")
+- (1x) [XT60 Charging Adapter with Banana Plugs](https://commonsenserc.com/product_info.php?cPath=187&products_id=4741 "commonsenserc.com")
 
 # Safety Disclaimer
 
@@ -35,7 +35,7 @@ The LM350 3 Amp Adjustable Voltage Regulator offers the ability to fine-tune its
 Output Voltage = 1.25 * (1 + R2 / R1)
 ```
 
-In this guide, we'll be using a 240 ohm resistor for R1 and an 820 ohm resistor for R2. This specific combination delivers an output voltage around 5.52 volts, perfectly suitable for powering your Raspberry Pi 4 Model B.
+In this guide, we'll be using a 240-ohm resistor for R1 and an 820-ohm resistor for R2. This specific combination delivers an output voltage around 5.52 volts, perfectly suitable for powering your Raspberry Pi 4 Model B.
 
 Need to adjust the output voltage for a different application? No problem! Check out this [online resistor calculator](https://www.tmatlantic.com/encyclopedia/index.php?ELEMENT_ID=53993 "online resistor calculator") to explore various resistor combinations and their corresponding output voltages.
 
@@ -47,19 +47,25 @@ Here's where the LM350 3 Amp Adjustable Voltage Regulator comes into play. Durin
 
 # Building the Power Supply Circuit
 
-To build the power supply circuit successfully, we need to first identify each of the LM350 3 Amp Adjustable Voltage Regulator's pins.
+To construct the power supply circuit, we must first identify the pins of the LM350 3 Amp Adjustable Voltage Regulator. Once the pins are identified, we will review the circuit diagram and select the necessary components.
 
 <img src="https://www.jotrin.com/userfiles/images/techs/LM350%20IC.png" style="width: 650px; height: auto;" alt="LM350 3 Amp Adjustable Voltage Regulator" title="LM350 3 Amp Adjustable Voltage Regulator">
 
-<img src="https://github.com/Theseus88/Powering-Your-Raspberry-Pi-4-Model-B-with-the-40-Pin-Header/blob/main/LM350%20circuit.svg" style="width: 445px; height: 210px;" alt="LM350 Power Supply Circuit" title="LM350 Power Supply Circuit">
+<img src="LM350 circuit.svg" style="width: 650px; height: auto;" alt="LM350 Power Supply Circuit" title="LM350 Power Supply Circuit">
 
-# Bringing it to Life: Powering Your Pi with the Circuit
+For our power supply circuit, we will use a 240-ohm resistor for R1, an 820-ohm resistor for R2, a 10-microfarad capacitor for C1, and a 100-microfarad capacitor for C2.
+
+# Testing the Power Supply Circuit
+
+Before applying power to the circuit, let's perform a quick health check. Grab your multimeter and measure the resistance between the LM350's Vout and Vadj pins. You should see a reading around 240-ohms. Then, measure the resistance between Vadj and ground, aiming for 820-ohms. If these values are off, it's time to revisit the circuit and ensure everything is wired correctly. Also check that the capacitors have the correct orientation.
+
+If all checks out, we can proceed to power up the circuit. We used a Lectron Pro 7.4V 2000mAh 25C Lipo Battery with an XT60 connector and an XT60 Charging Adapter with Banana Plugs as our power source. To verify the circuit's output voltage, measure the voltage between the LM350's Vout pin and ground. You should see a reading of approximately 5.52 volts. If the voltage is significantly different, it's necessary to re-examine the circuit for any potential issues.
 
 [<img src="https://commonsenserc.com/images/2S2000-25X_1000.jpg" style="width: 650px; height: auto;" alt="Lectron Pro 7.4V 2000mAh 25C Lipo Battery with XT60 Connector" title="Lectron Pro 7.4V 2000mAh 25C Lipo Battery with XT60 Connector">](https://commonsenserc.com/product_info.php?cPath=37_213&products_id=7180)
 
 [<img src="https://commonsenserc.com/images/BP2XT60M_700.jpg" style="width: 650px; height: auto;" alt="XT60 Charging Adapter with Banana Plugs" title="XT60 Charging Adapter with Banana Plugs">](https://commonsenserc.com/product_info.php?cPath=187&products_id=4741)
 
-[<img src="https://cdn.sparkfun.com/assets/parts/4/9/7/1/10474-02.jpg" style="width: 300px; height: auto;" alt="XT60 Connectors - Male/Female Pair" title="XT60 Connectors - Male/Female Pair">](https://www.sparkfun.com/products/10474)
+# Bringing it to Life: Powering Your Pi with the Circuit
 
 <img src="https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png" style="width: 650px; height: auto;" alt="GPIO and the 40-pin header" title="GPIO and the 40-pin header">
 
