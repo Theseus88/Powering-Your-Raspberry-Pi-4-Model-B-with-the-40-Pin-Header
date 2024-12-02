@@ -53,17 +53,45 @@ To construct the power supply circuit, we must first identify the pins of the LM
 
 <img src="LM350 circuit.svg" style="width: 650px; height: auto;" alt="LM350 Power Supply Circuit" title="LM350 Power Supply Circuit">
 
-For our power supply circuit, we will use a 240-ohm resistor for R1, an 820-ohm resistor for R2, a 10-microfarad capacitor for C1, and a 100-microfarad capacitor for C2.
+For our power supply circuit, we used a 240-ohm resistor for R1, an 820-ohm resistor for R2, a 10-microfarad capacitor for C1, and a 100-microfarad capacitor for C2.
 
 # Testing the Power Supply Circuit
 
-Before applying power to the circuit, let's perform a quick health check. Grab your multimeter and measure the resistance between the LM350's Vout and Vadj pins. You should see a reading around 240-ohms. Then, measure the resistance between Vadj and ground, aiming for 820-ohms. If these values are off, it's time to revisit the circuit and ensure everything is wired correctly. Also check that the capacitors have the correct orientation.
+Before applying power to the circuit, let's perform a quick health check. Grab your multimeter and measure the resistance between the LM350's Vout and Vadj pins. You should see a reading around 240-ohms. Then, measure the resistance between Vadj and ground, aiming for 820-ohms. If these values are off, it's time to revisit the circuit and ensure everything is wired correctly. Also check that the capacitors are in the correct orientation.
 
 If all checks out, we can proceed to power up the circuit. We used a Lectron Pro 7.4V 2000mAh 25C Lipo Battery with an XT60 connector and an XT60 Charging Adapter with Banana Plugs as our power source. To verify the circuit's output voltage, measure the voltage between the LM350's Vout pin and ground. You should see a reading of approximately 5.52 volts. If the voltage is significantly different, it's necessary to re-examine the circuit for any potential issues.
 
 [<img src="https://commonsenserc.com/images/2S2000-25X_1000.jpg" style="width: 650px; height: auto;" alt="Lectron Pro 7.4V 2000mAh 25C Lipo Battery with XT60 Connector" title="Lectron Pro 7.4V 2000mAh 25C Lipo Battery with XT60 Connector">](https://commonsenserc.com/product_info.php?cPath=37_213&products_id=7180)
 
 [<img src="https://commonsenserc.com/images/BP2XT60M_700.jpg" style="width: 650px; height: auto;" alt="XT60 Charging Adapter with Banana Plugs" title="XT60 Charging Adapter with Banana Plugs">](https://commonsenserc.com/product_info.php?cPath=187&products_id=4741)
+
+# Warning: Heat Dissipation and the LM350
+
+The LM350 voltage regulator is a workhorse, but it does generate heat during operation. This heat dissipation is directly related to the difference between the input voltage from the battery and the regulated output voltage. 
+
+**To ensure safe operation and prevent damage to the regulator, a heat sink is crucial.**
+
+Here's where understanding power dissipation comes in. We can calculate the estimated power the LM350 will dissipate using the following formula:
+
+```
+Power Dissipation = (Input Voltage - Output Voltage) x Output Current
+```
+Power Dissipation is in watts, Voltage is in volts, and Current is in amps.
+
+For example, let's assume a worst-case scenario where the input voltage from our 7.4V Lipo battery sits at its peak (around 8.4V when fully charged). We also need to consider the Raspberry Pi's typical current draw, which can range from 1.5A to 3A depending on workload. Here's the calculation for both ends of the spectrum:
+
+- Low Current Scenario (1.5A): Power Dissipation = (8.4V - 5.52V) * 1.5A = 4.32 Watts
+- High Current Scenario (3A): Power Dissipation = (8.4V - 5.52V) * 3A = 8.64 Watts
+
+Remember, this is an estimate, and the actual power dissipation may vary depending on several factors and load fluctuations. It's always recommended to choose a heat sink with a higher wattage capacity than your calculated value to provide a buffer for unexpected situations.
+
+Here are some additional tips for managing heat dissipation:
+
+- Ensure good airflow around the LM350 and the heat sink.
+- Mount the heat sink securely to the LM350 using thermal paste to improve heat transfer.
+- Consider using a lower input voltage if possible, as this will reduce the power dissipation.
+
+By incorporating a proper heat sink and understanding the power dissipation involved, you can ensure your LM350 voltage regulator functions reliably and keeps your Raspberry Pi project running smoothly.
 
 # Bringing it to Life: Powering Your Pi with the Circuit
 
